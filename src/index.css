@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 24 89% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 96%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.75rem;
+
+    /* Brand-specific tokens - Flavor Hospitality */
+    --primary-hover: 24 89% 48%;
+    --primary-light: 24 100% 96%;
+    --secondary-light: 24 92% 52%;
+    --text-on-dark: 0 0% 96%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, #ff6600 0%, #ff7505 50%, #ff6900 100%);
+    --gradient-primary: linear-gradient(135deg, #ff6600 0%, #ff7505 100%);
+    --gradient-accent: linear-gradient(135deg, #ff6600 0%, #ff7505 100%);
+
+    /* Shadows */
+    --shadow-card: 0 4px 12px rgba(255, 102, 0, 0.08);
+    --shadow-card-hover: 0 20px 40px rgba(255, 102, 0, 0.15);
+    --shadow-button: 0 4px 14px rgba(255, 102, 0, 0.25);
+
+    /* Sidebar defaults */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 24 100% 96%;
+    --sidebar-accent-foreground: 24 95% 53%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 24 95% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .glass-navbar-dark {
+    background: rgba(26, 26, 46, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  /* Animated gradient mesh for hero backgrounds */
+  .gradient-mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .gradient-mesh::before,
+  .gradient-mesh::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .gradient-mesh::before {
+    background: hsl(217 91% 53%);
+    top: -200px;
+    right: -100px;
+    animation-delay: 0s;
+  }
+
+  .gradient-mesh::after {
+    background: hsl(262 83% 58%);
+    bottom: -200px;
+    left: -100px;
+    animation-delay: -10s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 30px) scale(0.9);
+    }
+  }
+
+  /* Phone mockup styles */
+  .phone-mockup {
+    width: 220px;
+    height: 440px;
+    border-radius: 2rem;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    background: var(--gradient-primary);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  }
+
+  .phone-mockup-notch {
+    width: 100px;
+    height: 20px;
+    background: hsl(var(--secondary));
+    border-radius: 0 0 1rem 1rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .laptop-mockup {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 16/10;
+    border-radius: 0.75rem 0.75rem 0 0;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

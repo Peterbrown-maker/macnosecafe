@@ -5,21 +5,21 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 const testimonials = [
   {
-    text: "Sosha has transformed my restaurant business. Before, I could only serve walk-in customers. Now I'm reaching people across the whole township. My revenue has doubled in just three months!",
+    text: "Flavor has transformed my restaurant business. Before, I could only serve walk-in customers. Now I'm reaching people across the whole township. My revenue has doubled in just three months!",
     name: "Thando Mokoena",
     role: "Restaurant Owner",
     rating: 5,
   },
   {
-    text: "I order from Sosha at least three times a week. The app is so easy to use, and the riders are always friendly. It's amazing to have this kind of technology right here in our community.",
+    text: "I order from Flavor at least three times a week. The app is so easy to use, and the riders are always friendly. It's amazing to have this kind of technology right here in our community.",
     name: "Naledi Dlamini",
     role: "Regular Customer",
     rating: 5,
   },
   {
-    text: "Being a Sosha rider has changed my life. I can work when I want, earn good money, and I feel safe with the tracking features. It's the best job I've ever had.",
+    text: "Being a Flavor rider has changed my life. I can work when I want, earn good money, and I feel safe with the tracking features. It's the best job I've ever had.",
     name: "Sipho Nkosi",
-    role: "Sosha Rider",
+    role: "Flavor Rider",
     rating: 5,
   },
 ];

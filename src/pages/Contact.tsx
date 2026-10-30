@@ -9,16 +9,16 @@ import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "How do I place an order on Sosha?",
-    a: "Simply download the Sosha Customer app from Google Play, create an account, browse nearby restaurants, select your items, and place your order. You'll be able to track your delivery in real-time!",
+    q: "How do I place an order on Flavor?",
+    a: "Simply download the Flavor Customer app from Google Play, create an account, browse nearby restaurants, select your items, and place your order. You'll be able to track your delivery in real-time!",
   },
   {
-    q: "How can my restaurant join Sosha?",
+    q: "How can my restaurant join Flavor?",
     a: "We'd love to have you! Click the 'Register Your Restaurant' button on our homepage or fill out the contact form. Our partnerships team will get back to you within 24 hours.",
   },
   {
-    q: "How do I become a Sosha rider?",
-    a: "Download the Sosha Rider app, complete the registration process with your ID and contact details, and you'll be ready to start earning. No special vehicle required — bicycles, scooters, and motorbikes are all welcome.",
+    q: "How do I become a Flavor rider?",
+    a: "Download the Flavor Rider app, complete the registration process with your ID and contact details, and you'll be ready to start earning. No special vehicle required — bicycles, scooters, and motorbikes are all welcome.",
   },
   {
     q: "What areas do you currently serve?",
@@ -164,8 +164,8 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-foreground">Email</p>
-                        <a href="mailto:info@soshadeliveries.co.za" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                          info@soshadeliveries.co.za
+                        <a href="mailto:info@flavorhospitality.co.za" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                          info@flavorhospitality.co.za
                         </a>
                       </div>
                     </div>

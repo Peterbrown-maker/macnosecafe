@@ -26,7 +26,7 @@ export function RestaurantsSection() {
           <div className="space-y-8">
             <ScrollReveal>
               <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-primary-foreground">
-                Grow Your Restaurant With Sosha
+                Grow Your Restaurant With Flavor
               </h2>
             </ScrollReveal>
 

@@ -47,7 +47,7 @@ export function DownloadSection() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-4">
-              Get Sosha Deliveries
+              Get Flavor Deliveries
             </h2>
             <p className="text-lg text-secondary-foreground/70">
               Available on all platforms

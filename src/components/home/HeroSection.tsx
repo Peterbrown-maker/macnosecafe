@@ -6,19 +6,15 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center bg-white overflow-hidden">
-      {/* Animated gradient mesh with orange tones */}
-      <div className="absolute inset-0 opacity-30">
-        <motion.div
-          animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/20 blur-[100px]"
-        />
-        <motion.div
-          animate={{ y: [0, 30, 0], x: [0, -20, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-          className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-primary/15 blur-[100px]"
-        />
-      </div>
+      {/* Animated gradient mesh */}
+      <div className="gradient-mesh" />
+
+      {/* Extra floating orb */}
+      <motion.div
+        animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[100px]"
+      />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-24 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -32,7 +28,7 @@ export function HeroSection() {
               className="inline-flex items-center gap-2 rounded-pill px-4 py-1.5 text-xs font-semibold tracking-wide bg-primary/15 text-primary border border-primary/30 animate-pulse-soft"
             >
               <span className="w-2 h-2 rounded-full bg-primary" />
-              Authentic Dining Excellence
+              Fast Food Delivery in Your Township
             </motion.div>
 
             {/* Main heading */}
@@ -42,8 +38,8 @@ export function HeroSection() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="font-heading font-extrabold text-4xl md:text-5xl lg:text-[56px] leading-tight text-foreground"
             >
-              Flavor That Makes You{" "}
-              <span className="text-primary">Smile</span>
+              Delicious Meals Delivered{" "}
+              <span className="text-primary">Hot & Fresh</span>
             </motion.h1>
 
             {/* Subheading */}
@@ -53,7 +49,7 @@ export function HeroSection() {
               transition={{ delay: 0.5 }}
               className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
             >
-              Flavor Hospitality enhances dining experiences at retirement estates with tailored meal plans, quality service, and a focus on resident well-being. Every meal is crafted with care and served with a smile.
+              Order from your favorite local restaurants and get hot, delicious meals delivered to your doorstep in minutes. Flavor connects customers with quality restaurants across your township.
             </motion.p>
 
             {/* CTAs */}
@@ -64,10 +60,10 @@ export function HeroSection() {
               className="flex flex-wrap gap-4"
             >
               <Button variant="hero" size="lg" asChild>
-                <a href="#services">Explore Our Services</a>
+                <a href="#download">Download the App</a>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <a href="#contact">Get in Touch</a>
+                <a href="/services">How It Works</a>
               </Button>
             </motion.div>
 
@@ -79,9 +75,9 @@ export function HeroSection() {
               className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 border-t border-border"
             >
               {[
-                { target: 15, suffix: "+", label: "Years Experience" },
-                { target: 50, suffix: "+", label: "Retirement Estates" },
-                { target: 10000, suffix: "+", label: "Daily Meals Served" },
+                { target: 50, suffix: "+", label: "Partner Restaurants" },
+                { target: 200, suffix: "+", label: "Active Riders" },
+                { target: 5000, suffix: "+", label: "Daily Orders" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center md:text-left">
                   <div className="font-heading font-bold text-2xl md:text-3xl text-primary">
@@ -93,26 +89,34 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right — Featured menu image */}
+          {/* Right — Phone mockups */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="hidden lg:flex items-center justify-center"
+            className="hidden lg:flex items-center justify-center relative"
           >
-            <div className="relative">
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="relative"
-              >
-                <img 
-                  src="/images/Flavor-Hospitality_Platter.png" 
-                  alt="Flavor Hospitality Platter" 
-                  className="w-full max-w-md rounded-2xl shadow-xl"
-                />
-              </motion.div>
-            </div>
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative"
+            >
+              <PhoneMockup color="blue" className="-rotate-6 translate-x-[-60px] translate-y-[20px] z-10" />
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="relative z-20"
+            >
+              <PhoneMockup color="green" className="scale-110" />
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="relative"
+            >
+              <PhoneMockup color="purple" className="rotate-6 translate-x-[60px] translate-y-[20px] z-10" />
+            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -1,38 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { PhoneMockup, LaptopMockup } from "@/components/Mockups";
+import { PhoneMockup } from "@/components/Mockups";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
-import { Apple, Play, ExternalLink } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { APP_SCREENS, BRAND, whatsappLink } from "@/data/brianos";
 
-const platforms = [
+const screens = [
   {
-    title: "Customers",
-    description: "Order food and essentials from local businesses",
-    mockup: "phone" as const,
-    phoneColor: "blue" as const,
-    buttons: [
-      { label: "Download on Android", icon: Play, variant: "store" as const },
-    ],
-    note: "iOS Coming Soon",
+    title: "Order Off the Braai",
+    description: "Chops, wors, wings and ribs with pap and sides",
+    src: APP_SCREENS.braai,
   },
   {
-    title: "Riders",
-    description: "Earn money delivering in your community",
-    mockup: "phone" as const,
-    phoneColor: "green" as const,
-    buttons: [
-      { label: "Google Play", icon: Play, variant: "store" as const },
-      { label: "App Store", icon: Apple, variant: "store" as const },
-    ],
+    title: "Catch the Line-up",
+    description: "See what's on this week and book your table",
+    src: APP_SCREENS.club,
   },
   {
-    title: "Restaurants",
-    description: "Manage orders and grow your business",
-    mockup: "laptop" as const,
-    phoneColor: "blue" as const,
-    buttons: [
-      { label: "Access Restaurant Hub", icon: ExternalLink, variant: "hero" as const },
-    ],
+    title: "Delivered to You",
+    description: "Delivery, collect or sit-in. You choose",
+    src: APP_SCREENS.delivery,
   },
 ];
 
@@ -47,60 +34,46 @@ export function DownloadSection() {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-4">
-              Get Flavor Deliveries
+              The {BRAND.name} App
             </h2>
             <p className="text-lg text-secondary-foreground/70">
-              Available on all platforms
+              Coming soon to Android. Until then, we're one WhatsApp away.
             </p>
           </div>
         </ScrollReveal>
 
         <StaggerContainer className="grid md:grid-cols-3 gap-8">
-          {platforms.map((platform) => (
-            <StaggerItem key={platform.title}>
-              <div className="glass-card rounded-lg p-8 text-center space-y-6">
+          {screens.map((screen) => (
+            <StaggerItem key={screen.title}>
+              <div className="glass-card rounded-lg p-8 text-center space-y-4 h-full">
                 <h3 className="font-heading font-semibold text-xl text-primary-foreground">
-                  {platform.title}
+                  {screen.title}
                 </h3>
-                <p className="text-sm text-secondary-foreground/60">
-                  {platform.description}
+                <p className="text-sm text-secondary-foreground/70">
+                  {screen.description}
                 </p>
-
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex justify-center py-4"
+                  className="flex justify-center"
                 >
-                  {platform.mockup === "phone" ? (
-                    <PhoneMockup color={platform.phoneColor} className="scale-75" />
-                  ) : (
-                    <LaptopMockup className="scale-90" />
-                  )}
+                  <PhoneMockup src={screen.src} alt={`${BRAND.name} app: ${screen.title}`} />
                 </motion.div>
-
-                <div className="space-y-3">
-                  {platform.buttons.map((btn) => (
-                    <Button
-                      key={btn.label}
-                      variant={btn.variant}
-                      size="default"
-                      className="w-full"
-                      asChild
-                    >
-                      <a href="#" className="gap-2">
-                        <btn.icon size={18} />
-                        {btn.label}
-                      </a>
-                    </Button>
-                  ))}
-                  {platform.note && (
-                    <p className="text-xs text-secondary-foreground/40">{platform.note}</p>
-                  )}
-                </div>
               </div>
             </StaggerItem>
           ))}
         </StaggerContainer>
+
+        <ScrollReveal>
+          <div className="text-center mt-12">
+            <Button variant="hero" size="lg" asChild>
+              <a href={whatsappLink(`Hi ${BRAND.name}! I'd like to place an order.`)} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={18} />
+                Order via WhatsApp
+              </a>
+            </Button>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

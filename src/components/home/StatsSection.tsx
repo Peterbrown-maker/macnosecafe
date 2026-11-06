@@ -1,11 +1,11 @@
-import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { MENU_CATEGORIES } from "@/data/brianos";
 
 const stats = [
-  { target: 500, suffix: "+", label: "Daily Deliveries" },
-  { target: 50, suffix: "+", label: "Restaurant Partners" },
-  { target: 200, suffix: "+", label: "Active Riders" },
-  { target: 99, suffix: ".2%", label: "Order Accuracy" },
+  { target: MENU_CATEGORIES.length, label: "Menu Categories" },
+  { target: 3, label: "Ways to Eat" },
+  { target: 4, label: "Nights on the Line-up" },
+  { target: 7, label: "Days a Week" },
 ];
 
 export function StatsSection() {
@@ -21,23 +21,23 @@ export function StatsSection() {
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-heading font-bold text-4xl md:text-5xl text-primary-foreground mb-2">
-                  <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+                  {stat.target}
                 </div>
-                <div className="text-sm text-primary-foreground/70">{stat.label}</div>
+                <div className="text-sm text-primary-foreground/80">{stat.label}</div>
               </div>
             ))}
           </div>
         </ScrollReveal>
 
-        {/* Partner logos placeholder */}
+        {/* What's on the menu */}
         <ScrollReveal delay={0.2}>
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            {Array.from({ length: 6 }).map((_, i) => (
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {MENU_CATEGORIES.map((category) => (
               <div
-                key={i}
-                className="w-24 h-10 md:w-32 md:h-12 rounded-lg bg-primary-foreground/10 flex items-center justify-center"
+                key={category}
+                className="px-4 py-2 rounded-pill bg-primary-foreground/15 text-sm text-primary-foreground font-medium"
               >
-                <span className="text-xs text-primary-foreground/30 font-medium">Partner {i + 1}</span>
+                {category}
               </div>
             ))}
           </div>

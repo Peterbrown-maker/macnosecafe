@@ -4,55 +4,23 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/Scroll
 import { SectionPill } from "@/components/SectionPill";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { UtensilsCrossed, Clock, Leaf, X, MessageCircle, Utensils, BookOpen, Calendar, Users } from "lucide-react";
-import { useState } from "react";
+import { Beef, BookOpen, Calendar, Drumstick, Fish, Martini, MessageCircle, Smartphone, Utensils, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { BRAND, MENU, whatsappLink } from "@/data/brianos";
 
-const menuCategories = [
-  {
-    id: "café",
-    name: "Café Menu",
-    description: "Start your day with our freshly prepared breakfast and coffee selections",
-    icon: UtensilsCrossed,
-    image: "/images/Flavor-Hospitality_Platter.png",
-    items: [
-      { name: "Breakfast Platters", price: "R89 - R129" },
-      { name: "Fresh Pastries", price: "R35 - R65" },
-      { name: "Specialty Coffee", price: "R28 - R55" },
-      { name: "Fresh Juices", price: "R32 - R48" },
-    ],
-  },
-  {
-    id: "signature",
-    name: "Signature Menu",
-    description: "Our most popular dishes crafted with premium ingredients",
-    icon: Leaf,
-    image: "/images/Flavor-Hospitality_Chicken-Prego.png",
-    items: [
-      { name: "Grilled Chicken Prego", price: "R95 - R135" },
-      { name: "Chicken Wings Combo", price: "R109 - R169" },
-      { name: "Fresh Salad Platters", price: "R79 - R145" },
-      { name: "Gourmet Wraps", price: "R85 - R125" },
-    ],
-  },
-  {
-    id: "specials",
-    name: "Daily Specials",
-    description: "Limited time offers and chef's special creations",
-    icon: Clock,
-    image: "/images/Flavor-Hospitality_Buffet-salads.png",
-    items: [
-      { name: "Monday: Rotisserie Special", price: "R115" },
-      { name: "Wednesday: Buffet Day", price: "R149" },
-      { name: "Friday: BBQ Selection", price: "R135" },
-      { name: "Weekend Brunch Combo", price: "R165" },
-    ],
-  },
-];
+const GROUP_ICONS = { braai: Beef, "wings-burgers": Drumstick, platters: Fish, bar: Martini } as Record<string, typeof Beef>;
+
+type BookingType = "table" | "meal";
+
+const BOOKING_LABEL: Record<BookingType, string> = { table: "Book a Table", meal: "Pre-order a Meal" };
 
 const Menu = () => {
+  const location = useLocation();
   const [modalOpen, setModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingType, setBookingType] = useState<BookingType>("table");
+  const [bookingLink, setBookingLink] = useState<string | null>(null);
   const [bookingDetails, setBookingDetails] = useState("");
   const [bookingForm, setBookingForm] = useState({
     date: "",
@@ -64,6 +32,17 @@ const Menu = () => {
     specialRequests: "",
   });
 
+  const openBooking = (type: BookingType) => {
+    setBookingType(type);
+    setModalOpen(false);
+    setBookingModalOpen(true);
+  };
+
+  // "Book a Table" buttons elsewhere on the site link to /menu#book.
+  useEffect(() => {
+    if (location.hash === "#book") openBooking("table");
+  }, [location.key, location.hash]);
+
   const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setBookingForm((prev) => ({
@@ -74,65 +53,70 @@ const Menu = () => {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setBookingDetails(`${bookingForm.date} at ${bookingForm.time} for ${bookingForm.guests} ${bookingForm.guests === "1" ? "guest" : "guests"}`);
-    setBookingSuccess(true);
+    const summary = `${bookingForm.date} at ${bookingForm.time} for ${bookingForm.guests} ${bookingForm.guests === "1" ? "guest" : "guests"}`;
+    const message = [
+      `Hi ${BRAND.name}! I'd like to ${bookingType === "table" ? "book a table" : "pre-order a meal"}.`,
+      `When: ${summary}`,
+      `Name: ${bookingForm.name}`,
+      `Phone: ${bookingForm.phone}`,
+      bookingForm.email && `Email: ${bookingForm.email}`,
+      bookingForm.specialRequests && `Requests: ${bookingForm.specialRequests}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const link = whatsappLink(message);
+    setBookingDetails(summary);
+    setBookingLink(link);
     setBookingModalOpen(false);
+    window.open(link, "_blank", "noopener,noreferrer");
   };
 
   const orderOptions = [
     {
       id: "order-now",
-      name: "Order Now",
-      description: "Quick delivery to your location",
-      icon: UtensilsCrossed,
+      name: "Order in the App",
+      description: "Delivery or collect, right from your phone",
+      icon: Smartphone,
       action: null,
       badge: "Coming Soon",
-      color: "from-orange-500 to-orange-600",
     },
     {
       id: "book-meal",
-      name: "Book a Meal",
-      description: "Reserve your meal via WhatsApp",
+      name: BOOKING_LABEL.meal,
+      description: "Tell us what you'd like via WhatsApp",
       icon: MessageCircle,
-      action: () => {
-        setModalOpen(false);
-        setBookingModalOpen(true);
-      },
+      action: () => openBooking("meal"),
       badge: null,
-      color: "from-green-500 to-green-600",
     },
     {
       id: "book-table",
-      name: "Book a Table",
-      description: "Dine in and enjoy our atmosphere",
+      name: BOOKING_LABEL.table,
+      description: "Eat in with the squad and stay for the vibes",
       icon: Utensils,
-      action: () => {
-        setModalOpen(false);
-        setBookingModalOpen(true);
-      },
+      action: () => openBooking("table"),
       badge: null,
-      color: "from-blue-500 to-blue-600",
     },
   ];
+
   return (
     <div className="min-h-screen">
       <Navbar />
       <main>
         {/* Hero */}
         <section className="gradient-hero relative overflow-hidden pt-32 pb-24">
-          <div className="gradient-mesh" />
+          <img src="/images/brianos/mixed_grill_platter.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <SectionPill variant="dark">Taste Our Selection</SectionPill>
+              <SectionPill variant="dark">Straight Off the Braai</SectionPill>
               <h1 className="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl text-primary-foreground mt-6 mb-6">
                 Our Menu
               </h1>
-              <p className="text-lg text-secondary-foreground/70 max-w-2xl mx-auto">
-                Discover our delicious range of freshly prepared meals, from café favorites to signature dishes.
+              <p className="text-lg text-secondary-foreground/80 max-w-2xl mx-auto">
+                Flame-grilled meat, sharing platters, seafood, burgers and cocktails, all made with love and served with joy.
               </p>
             </motion.div>
           </div>
@@ -142,16 +126,11 @@ const Menu = () => {
         <section className="py-24 bg-background">
           <div className="container mx-auto px-4 lg:px-8">
             <StaggerContainer className="space-y-24">
-              {menuCategories.map((category, index) => {
-                const Icon = category.icon;
+              {MENU.map((group, index) => {
+                const Icon = GROUP_ICONS[group.id];
                 return (
-                  <StaggerItem key={category.id}>
-                    <div
-                      id={category.id}
-                      className={`grid lg:grid-cols-2 gap-12 items-center ${
-                        index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                      }`}
-                    >
+                  <StaggerItem key={group.id}>
+                    <div id={group.id} className="grid lg:grid-cols-2 gap-12 items-center">
                       {/* Image */}
                       <motion.div
                         initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
@@ -166,8 +145,9 @@ const Menu = () => {
                           className="relative"
                         >
                           <img
-                            src={category.image}
-                            alt={category.name}
+                            src={group.image}
+                            alt={group.name}
+                            loading="lazy"
                             className="w-full max-w-md rounded-2xl shadow-xl"
                           />
                         </motion.div>
@@ -182,34 +162,41 @@ const Menu = () => {
                         className="space-y-6"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-lg gradient-primary text-primary-foreground flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-lg gradient-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
                             <Icon size={28} />
                           </div>
                           <h2 className="font-heading font-bold text-3xl text-foreground">
-                            {category.name}
+                            {group.name}
                           </h2>
                         </div>
 
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                          {category.description}
+                          {group.description}
                         </p>
 
                         {/* Menu Items */}
                         <div className="space-y-3">
-                          {category.items.map((item, itemIndex) => (
+                          {group.items.map((item, itemIndex) => (
                             <motion.div
                               key={item.name}
                               initial={{ opacity: 0, x: -20 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               viewport={{ once: true }}
                               transition={{ delay: itemIndex * 0.1 }}
-                              className="flex justify-between items-center bg-card p-4 rounded-lg hover:shadow-md transition-shadow"
+                              className="flex items-center gap-4 bg-card p-3 rounded-lg shadow-card hover:shadow-md transition-shadow"
                             >
-                              <span className="font-medium text-foreground">
-                                {item.name}
-                              </span>
-                              <span className="text-primary font-semibold">
-                                {item.price}
+                              <img
+                                src={item.image}
+                                alt=""
+                                loading="lazy"
+                                className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+                              />
+                              <div className="flex-1 min-w-0">
+                                <div className="font-medium text-foreground">{item.name}</div>
+                                <div className="text-sm text-muted-foreground">{item.description}</div>
+                              </div>
+                              <span className="text-primary font-semibold whitespace-nowrap">
+                                R{item.price}
                               </span>
                             </motion.div>
                           ))}
@@ -219,8 +206,8 @@ const Menu = () => {
                           <Button variant="hero" size="lg" onClick={() => setModalOpen(true)} className="w-full">
                             Order Now
                           </Button>
-                          <Button variant="heroOutline" size="lg" onClick={() => setBookingModalOpen(true)} className="w-full">
-                            Book a Meal
+                          <Button variant="heroOutline" size="lg" onClick={() => openBooking("table")} className="w-full">
+                            Book a Table
                           </Button>
                         </div>
                       </motion.div>
@@ -237,25 +224,25 @@ const Menu = () => {
           <div className="container mx-auto px-4 lg:px-8 text-center">
             <ScrollReveal>
               <h2 className="font-heading font-bold text-3xl md:text-4xl text-primary-foreground mb-6">
-                Ready to Order?
+                Ready to Eat?
               </h2>
-              <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-                Download our complete menu or book your meal now through WhatsApp for quick delivery.
+              <p className="text-primary-foreground/90 mb-8 max-w-xl mx-auto">
+                Send us a WhatsApp to order or book, and we'll get the fire going.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Button variant="heroOutline" size="lg" asChild>
-                  <a href="/">Download Full Menu</a>
-                </Button>
-                <Button variant="heroOutline" size="lg" asChild>
-                  <a
-                    href="https://wa.me/27665655305?text=I%20want%20to%20book%20a%20meal%20at%20Flavor"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Book via WhatsApp
-                  </a>
-                </Button>
-              </div>
+              <Button
+                variant="heroOutline"
+                size="lg"
+                className="border-white text-white hover:bg-white/10"
+                asChild
+              >
+                <a
+                  href={whatsappLink(`Hi ${BRAND.name}! I'd like to place an order.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Order via WhatsApp
+                </a>
+              </Button>
             </ScrollReveal>
           </div>
         </section>
@@ -293,7 +280,8 @@ const Menu = () => {
                   </div>
                   <button
                     onClick={() => setModalOpen(false)}
-                    className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                    className="p-2 hover:bg-muted rounded-lg transition-colors"
+                    aria-label="Close"
                   >
                     <X size={20} className="text-muted-foreground" />
                   </button>
@@ -311,18 +299,16 @@ const Menu = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        onClick={option.action}
+                        onClick={option.action ?? undefined}
                         disabled={isDisabled}
                         className={`w-full p-4 rounded-lg border-2 transition-all ${
                           isDisabled
-                            ? "border-border bg-secondary/50 cursor-not-allowed opacity-75"
-                            : "border-border hover:border-primary bg-card hover:bg-secondary cursor-pointer"
+                            ? "border-border bg-muted cursor-not-allowed opacity-75"
+                            : "border-border hover:border-primary bg-card hover:bg-primary-light cursor-pointer"
                         }`}
                       >
                         <div className="flex items-start gap-4">
-                          <div
-                            className={`w-12 h-12 rounded-lg bg-gradient-to-br ${option.color} flex items-center justify-center flex-shrink-0 text-white`}
-                          >
+                          <div className="w-12 h-12 rounded-lg gradient-primary flex items-center justify-center flex-shrink-0 text-white">
                             <Icon size={24} />
                           </div>
                           <div className="flex-1 text-left">
@@ -347,9 +333,9 @@ const Menu = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="px-6 py-4 border-t border-border bg-secondary/30">
+                <div className="px-6 py-4 border-t border-border bg-muted">
                   <p className="text-xs text-muted-foreground text-center">
-                    More options coming soon. Stay tuned! 🍽️
+                    Pay by card or cash. Alcohol is for customers 18+ only.
                   </p>
                 </div>
               </div>
@@ -374,7 +360,7 @@ const Menu = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none overflow-y-auto"
+              className="fixed inset-0 z-50 flex items-start justify-center p-4 pointer-events-none overflow-y-auto"
             >
               <div className="bg-card rounded-2xl shadow-2xl max-w-md w-full pointer-events-auto my-8">
                 {/* Header */}
@@ -384,12 +370,13 @@ const Menu = () => {
                       <Calendar className="text-primary-foreground" size={24} />
                     </div>
                     <h3 className="font-heading font-bold text-xl text-foreground">
-                      Book Your Meal
+                      {BOOKING_LABEL[bookingType]}
                     </h3>
                   </div>
                   <button
                     onClick={() => setBookingModalOpen(false)}
-                    className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                    className="p-2 hover:bg-muted rounded-lg transition-colors"
+                    aria-label="Close"
                   >
                     <X size={20} className="text-muted-foreground" />
                   </button>
@@ -439,12 +426,15 @@ const Menu = () => {
                       required
                       className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     >
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                         <option key={num} value={num}>
                           {num} {num === 1 ? "Guest" : "Guests"}
                         </option>
                       ))}
                     </select>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      10 or more? Call us on {BRAND.phoneDisplay}.
+                    </p>
                   </div>
 
                   {/* Name */}
@@ -473,7 +463,7 @@ const Menu = () => {
                       name="phone"
                       value={bookingForm.phone}
                       onChange={handleBookingChange}
-                      placeholder="+27..."
+                      placeholder="071 234 5678"
                       required
                       className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     />
@@ -489,7 +479,7 @@ const Menu = () => {
                       name="email"
                       value={bookingForm.email}
                       onChange={handleBookingChange}
-                      placeholder="your@email.com"
+                      placeholder="you@example.com"
                       className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     />
                   </div>
@@ -497,13 +487,18 @@ const Menu = () => {
                   {/* Special Requests */}
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      📝 Special Requests (Optional)
+                      📝 {bookingType === "meal" ? "What Would You Like? *" : "Special Requests (Optional)"}
                     </label>
                     <textarea
                       name="specialRequests"
                       value={bookingForm.specialRequests}
                       onChange={handleBookingChange}
-                      placeholder="Any dietary requirements, allergies, or special requests..."
+                      required={bookingType === "meal"}
+                      placeholder={
+                        bookingType === "meal"
+                          ? "e.g. 1 Mixed Grill Platter, 2 Tropical Cocktails"
+                          : "Birthdays, allergies, where you'd like to sit..."
+                      }
                       rows={3}
                       className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-none"
                     />
@@ -511,7 +506,8 @@ const Menu = () => {
 
                   {/* Submit Button */}
                   <Button type="submit" variant="hero" size="lg" className="w-full mt-6">
-                    Confirm Booking
+                    <MessageCircle size={18} />
+                    Continue on WhatsApp
                   </Button>
                 </form>
               </div>
@@ -520,15 +516,15 @@ const Menu = () => {
         )}
       </AnimatePresence>
 
-      {/* Success Modal */}
+      {/* Next-step Modal */}
       <AnimatePresence>
-        {bookingSuccess && (
+        {bookingLink && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setBookingSuccess(false)}
+              onClick={() => setBookingLink(null)}
               className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
             />
             <motion.div
@@ -539,53 +535,41 @@ const Menu = () => {
               className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
             >
               <div className="bg-card rounded-2xl shadow-2xl max-w-md w-full pointer-events-auto">
-                {/* Success Icon */}
                 <div className="p-8 text-center">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                    className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6"
+                    className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6 text-white"
                   >
-                    <motion.div
-                      initial={{ rotate: -180, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      transition={{ delay: 0.4, duration: 0.6 }}
-                      className="text-4xl"
-                    >
-                      ✓
-                    </motion.div>
+                    <MessageCircle size={36} />
                   </motion.div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <h3 className="font-heading font-bold text-2xl text-foreground mb-3">
-                      Booking Confirmed!
-                    </h3>
-                    <p className="text-muted-foreground mb-4">
-                      Your booking has been successfully submitted for:
+                  <h3 className="font-heading font-bold text-2xl text-foreground mb-3">
+                    Almost There!
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Press send in WhatsApp to get your request to us:
+                  </p>
+                  <div className="bg-muted rounded-lg p-4 mb-6 border border-border">
+                    <p className="text-sm font-semibold text-foreground">
+                      {bookingDetails}
                     </p>
-                    <div className="bg-secondary/50 rounded-lg p-4 mb-6 border border-border">
-                      <p className="text-sm font-semibold text-foreground">
-                        {bookingDetails}
-                      </p>
-                    </div>
-                    <p className="text-muted-foreground text-sm mb-6">
-                      You will receive a WhatsApp confirmation shortly with all your booking details.
-                    </p>
-                  </motion.div>
+                  </div>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    We'll confirm with you in that chat. WhatsApp didn't open? Use the button below.
+                  </p>
 
-                  <Button
-                    variant="hero"
-                    size="lg"
-                    onClick={() => setBookingSuccess(false)}
-                    className="w-full"
-                  >
-                    Done
-                  </Button>
+                  <div className="space-y-3">
+                    <Button variant="hero" size="lg" className="w-full" asChild>
+                      <a href={bookingLink} target="_blank" rel="noopener noreferrer">
+                        Open WhatsApp
+                      </a>
+                    </Button>
+                    <Button variant="heroOutline" size="lg" onClick={() => setBookingLink(null)} className="w-full">
+                      Done
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>

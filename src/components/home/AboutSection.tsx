@@ -1,28 +1,23 @@
-import { UtensilsCrossed, Users, Heart } from "lucide-react";
+import { Flame, Martini, Music2 } from "lucide-react";
 import { SectionPill } from "@/components/SectionPill";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
+import { BRAND } from "@/data/brianos";
 
 const features = [
   {
-    icon: UtensilsCrossed,
-    title: "Quality Dining",
-    description: "Carefully crafted menus tailored to nutritional needs and resident preferences. Fresh ingredients, authentic recipes.",
-    accent: "border-t-primary",
-    iconBg: "bg-primary/10 text-primary",
+    icon: Flame,
+    title: "Off the Braai",
+    description: "Flame-grilled chops, wors, wings and ribs with pap and sides. The way it should be done.",
   },
   {
-    icon: Users,
-    title: "Expert Service",
-    description: "Professional hospitality staff trained in senior care and dining service excellence. Personalized attention for every resident.",
-    accent: "border-t-primary",
-    iconBg: "bg-primary/10 text-primary",
+    icon: Martini,
+    title: "The Bar & Lounge",
+    description: "Fresh tropical cocktails shaken to order, cold drinks and a spot to sit down with the squad.",
   },
   {
-    icon: Heart,
-    title: "Well-being Focus",
-    description: "We believe great food enhances health and happiness. Nutritious, delicious meals that bring residents together.",
-    accent: "border-t-primary",
-    iconBg: "bg-primary/10 text-primary",
+    icon: Music2,
+    title: "The Club Nights",
+    description: "Amapiano Fridays, deep house Saturdays and Sunday chill sessions with a live band.",
   },
 ];
 
@@ -32,16 +27,17 @@ export function AboutSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <ScrollReveal>
-            <SectionPill>About Flavor Hospitality</SectionPill>
+            <SectionPill>About {BRAND.name}</SectionPill>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mt-4 mb-6">
-              Authentic Dining for Retirement Living
+              Shisanyama by Day, Club by Night
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Flavor Hospitality specializes in enhancing the dining experience at retirement estates. With over 15 years of hospitality expertise, we deliver quality meals, professional service, and genuine care to residents across South Africa.
+              {BRAND.name} is where Soshanguve comes for the meat and stays for the music. Grab a plate off the fire,
+              get it delivered to where you are, or book a table and pull through. {BRAND.tagline}.
             </p>
           </ScrollReveal>
         </div>
@@ -49,8 +45,8 @@ export function AboutSection() {
         <StaggerContainer className="grid md:grid-cols-3 gap-8">
           {features.map((feature) => (
             <StaggerItem key={feature.title}>
-              <div className={`bg-card rounded-lg p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border-t-4 ${feature.accent} group`}>
-                <div className={`w-14 h-14 rounded-lg ${feature.iconBg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              <div className="bg-card rounded-lg p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border-t-4 border-t-primary group">
+                <div className="w-14 h-14 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <feature.icon size={28} />
                 </div>
                 <h3 className="font-heading font-semibold text-xl text-foreground mb-3">

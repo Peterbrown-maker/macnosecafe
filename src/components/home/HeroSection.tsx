@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PhoneMockup } from "@/components/Mockups";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { APP_SCREENS, BRAND } from "@/data/brianos";
 
 export function HeroSection() {
   return (
@@ -25,10 +26,10 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 rounded-pill px-4 py-1.5 text-xs font-semibold tracking-wide bg-primary/15 text-primary border border-primary/30 animate-pulse-soft"
+              className="inline-flex items-center gap-2 rounded-pill px-4 py-1.5 text-xs font-semibold tracking-wide bg-primary/15 text-primary border border-primary/30"
             >
               <span className="w-2 h-2 rounded-full bg-primary" />
-              Fast Food Delivery in Your Township
+              {BRAND.descriptor} — Soshanguve
             </motion.div>
 
             {/* Main heading */}
@@ -38,8 +39,7 @@ export function HeroSection() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="font-heading font-extrabold text-4xl md:text-5xl lg:text-[56px] leading-tight text-foreground"
             >
-              Delicious Meals Delivered{" "}
-              <span className="text-primary">Hot & Fresh</span>
+              Braai. Drinks. <span className="text-primary">Vibes.</span>
             </motion.h1>
 
             {/* Subheading */}
@@ -49,7 +49,8 @@ export function HeroSection() {
               transition={{ delay: 0.5 }}
               className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
             >
-              Order from your favorite local restaurants and get hot, delicious meals delivered to your doorstep in minutes. Flavor connects customers with quality restaurants across your township.
+              {BRAND.promise} Flame-grilled chops, wors, wings and ribs with pap and sides, then Amapiano and deep house
+              when the night gets going. Order the meat, or come through.
             </motion.p>
 
             {/* CTAs */}
@@ -60,10 +61,10 @@ export function HeroSection() {
               className="flex flex-wrap gap-4"
             >
               <Button variant="hero" size="lg" asChild>
-                <a href="#download">Download the App</a>
+                <Link to="/menu">See the Menu</Link>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <a href="/services">How It Works</a>
+                <Link to="/menu#book">Book a Table</Link>
               </Button>
             </motion.div>
 
@@ -72,16 +73,16 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8 border-t border-border"
+              className="grid grid-cols-3 gap-6 pt-8 border-t border-border"
             >
               {[
-                { target: 50, suffix: "+", label: "Partner Restaurants" },
-                { target: 200, suffix: "+", label: "Active Riders" },
-                { target: 5000, suffix: "+", label: "Daily Orders" },
+                { target: 7, label: "Days a week" },
+                { target: 4, label: "Nights on the line-up" },
+                { target: 3, label: "Ways to eat" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center md:text-left">
                   <div className="font-heading font-bold text-2xl md:text-3xl text-primary">
-                    <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+                    {stat.target}
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
                 </div>
@@ -101,21 +102,33 @@ export function HeroSection() {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <PhoneMockup color="blue" className="-rotate-6 translate-x-[-60px] translate-y-[20px] z-10" />
+              <PhoneMockup
+                src={APP_SCREENS.club}
+                alt={`${BRAND.name} app: the weekly club line-up`}
+                className="-rotate-6 translate-x-[50px] translate-y-[20px] z-10"
+              />
             </motion.div>
             <motion.div
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               className="relative z-20"
             >
-              <PhoneMockup color="green" className="scale-110" />
+              <PhoneMockup
+                src={APP_SCREENS.braai}
+                alt={`${BRAND.name} app: straight off the braai`}
+                className="scale-110"
+              />
             </motion.div>
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
               className="relative"
             >
-              <PhoneMockup color="purple" className="rotate-6 translate-x-[60px] translate-y-[20px] z-10" />
+              <PhoneMockup
+                src={APP_SCREENS.delivery}
+                alt={`${BRAND.name} app: delivered to where you are`}
+                className="rotate-6 translate-x-[-50px] translate-y-[20px] z-10"
+              />
             </motion.div>
           </motion.div>
         </div>

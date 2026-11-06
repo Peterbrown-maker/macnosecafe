@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { Search, ChefHat, Bike, PackageCheck } from "lucide-react";
+import { ClipboardList, Flame, MapPin, UtensilsCrossed } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 const steps = [
   {
-    icon: Search,
-    title: "Browse & Order",
-    description: "Customer opens the app and orders from local restaurants",
+    icon: MapPin,
+    title: "Choose How You Eat",
+    description: "Delivery to where you are, collect from us, or sit in with the squad",
   },
   {
-    icon: ChefHat,
-    title: "Restaurant Prepares",
-    description: "Restaurant receives the order instantly and starts preparing",
+    icon: ClipboardList,
+    title: "Pick Off the Menu",
+    description: "Grills, wings, ribs, platters, seafood, burgers and cocktails",
   },
   {
-    icon: Bike,
-    title: "Rider Picks Up",
-    description: "Nearest available rider is matched and picks up the order",
+    icon: Flame,
+    title: "We Fire It Up",
+    description: "Your order goes on the braai and gets grilled to order",
   },
   {
-    icon: PackageCheck,
-    title: "Delivered",
-    description: "Customer receives their order with real-time tracking",
+    icon: UtensilsCrossed,
+    title: "Eat & Enjoy",
+    description: "Track your driver to your door, or come through for the vibes",
   },
 ];
 
@@ -31,7 +31,7 @@ export function HowItWorksSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <ScrollReveal>
           <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-foreground text-center mb-16">
-            Seamless From Order to Doorstep
+            From the Fire to Your Plate
           </h2>
         </ScrollReveal>
 

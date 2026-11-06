@@ -4,10 +4,10 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { AboutSection } from "@/components/home/AboutSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
-import { RestaurantsSection } from "@/components/home/RestaurantsSection";
-import { RidersSection } from "@/components/home/RidersSection";
+import { LineUpSection } from "@/components/home/LineUpSection";
+import { AppSection } from "@/components/home/AppSection";
 import { StatsSection } from "@/components/home/StatsSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { SpecialsSection } from "@/components/home/SpecialsSection";
 import { DownloadSection } from "@/components/home/DownloadSection";
 
 const Index = () => {
@@ -19,10 +19,10 @@ const Index = () => {
         <AboutSection />
         <HowItWorksSection />
         <ServicesSection />
-        <RestaurantsSection />
-        <RidersSection />
+        <LineUpSection />
+        <AppSection />
         <StatsSection />
-        <TestimonialsSection />
+        <SpecialsSection />
         <DownloadSection />
       </main>
       <Footer />

@@ -1,11 +1,10 @@
-import { MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { StoreButtons } from "@/components/StoreButtons";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
-import { BRAND, GALLERY, whatsappLink } from "@/data/makhanani";
+import { BRAND, GALLERY } from "@/data/makhanani";
 
 export function OrderSection() {
   return (
-    <section className="py-24 gradient-hero relative overflow-hidden" id="order">
+    <section className="py-24 gradient-hero relative overflow-hidden" id="app">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/30 blur-[150px]" />
       </div>
@@ -16,7 +15,7 @@ export function OrderSection() {
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-4">
               Hungry Yet?
             </h2>
-            <p className="text-lg text-secondary-foreground/70">Straight out of our pots. We're one WhatsApp away.</p>
+            <p className="text-lg text-secondary-foreground/70">Straight out of our pots. Order in the {BRAND.name} app on Android or iPhone.</p>
           </div>
         </ScrollReveal>
 
@@ -35,16 +34,7 @@ export function OrderSection() {
 
         <ScrollReveal>
           <div className="text-center mt-12">
-            <Button variant="hero" size="lg" asChild>
-              <a
-                href={whatsappLink(`Hi ${BRAND.name}! I'd like to place an order.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle size={18} />
-                Order on WhatsApp
-              </a>
-            </Button>
+            <StoreButtons center />
           </div>
         </ScrollReveal>
       </div>

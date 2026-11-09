@@ -13,12 +13,17 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-/** Start each new page at the top instead of keeping the last page's scroll position. */
+/** Start each new page at the top, or at the #section the link points to. */
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash, key } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      // Wait a frame so the target section has rendered.
+      requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" }));
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash, key]);
   return null;
 };
 

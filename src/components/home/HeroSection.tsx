@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BRAND, whatsappLink } from "@/data/makhanani";
+import { StoreButtons } from "@/components/StoreButtons";
+import { BRAND } from "@/data/makhanani";
 
 export function HeroSection() {
   return (
@@ -64,21 +64,11 @@ export function HeroSection() {
               <Button variant="hero" size="lg" asChild>
                 <Link to="/menu">See the Menu</Link>
               </Button>
-              <Button
-                variant="heroOutline"
-                size="lg"
-                className="border-white/60 text-white hover:bg-white/10"
-                asChild
-              >
-                <a
-                  href={whatsappLink(`Hi ${BRAND.name}! I'd like to place an order.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle size={18} />
-                  Order on WhatsApp
-                </a>
-              </Button>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85 }}>
+              <p className="text-sm text-white/60 mb-3">Order in the {BRAND.name} app</p>
+              <StoreButtons />
             </motion.div>
 
             <motion.div

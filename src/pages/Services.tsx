@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { SectionPill } from "@/components/SectionPill";
-import { Button } from "@/components/ui/button";
+import { StoreButtons } from "@/components/StoreButtons";
 import { motion } from "framer-motion";
 import { CalendarDays, Clock, ShoppingBag, UsersRound } from "lucide-react";
 import { BRAND, OPENING_HOURS, PHOTOS } from "@/data/makhanani";
@@ -20,15 +19,15 @@ const services = [
     icon: ShoppingBag,
     title: "Takeaway",
     longDescription:
-      "On your way home? WhatsApp your order ahead with the time you'll pull up, and we'll have it packed and ready.",
-    howItWorks: "WhatsApp your order → We confirm → Collect at the counter → Pay cash or card",
+      "On your way home? Order ahead in the Makhanani app and we'll have it packed and ready when you pull up.",
+    howItWorks: "Open the app → Pick your plate → Place your order → Collect at the counter",
   },
   {
     icon: CalendarDays,
     title: "Big Orders & Events",
     longDescription:
       "Funerals, family gatherings, stokvels, parties and after-tears. Tell us how many people you're feeding and when, and we'll cook for everyone. Please order at least a day ahead.",
-    howItWorks: "Tell us the date and headcount → We quote you → Confirm on WhatsApp → Collect on the day",
+    howItWorks: "Order in the app or call us → Tell us the date and headcount → We confirm → Collect on the day",
   },
 ];
 
@@ -121,16 +120,9 @@ const Services = () => {
                 Ready to Eat?
               </h2>
               <p className="text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-                Send us your order on WhatsApp and we'll have it ready.
+                Download the Makhanani app and place your order.
               </p>
-              <Button
-                variant="heroOutline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10"
-                asChild
-              >
-                <Link to="/menu#order">Order Now</Link>
-              </Button>
+              <StoreButtons center />
             </ScrollReveal>
           </div>
         </section>

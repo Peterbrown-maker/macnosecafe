@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
-import { ClipboardList, CookingPot, MessageCircle, UtensilsCrossed } from "lucide-react";
+import { ClipboardList, CookingPot, Smartphone, UtensilsCrossed } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 const steps = [
   {
+    icon: Smartphone,
+    title: "Get the App",
+    description: "Download Makhanani from the Google Play Store or the Apple App Store",
+  },
+  {
     icon: ClipboardList,
     title: "Pick Your Plate",
     description: "Half skop, full skop, cow head, pig head, cow heels, with pap and gravy",
-  },
-  {
-    icon: MessageCircle,
-    title: "Send a WhatsApp",
-    description: "Tell us what you want and when you're coming. We'll confirm in the chat",
   },
   {
     icon: CookingPot,

@@ -11,7 +11,7 @@ npm run dev
 
 ## Update the content
 
-Prices, the menu, opening hours, specials, FAQs, the business name and contact details (including the WhatsApp number every order goes to) all live in `src/data/makhanani.ts`. Anything marked `TODO` there is a placeholder. The page title and social preview text are in `index.html`. Photos and logos are in `public/images/makhanani/`.
+Prices, the menu, opening hours, specials, FAQs, the business name and contact details and the Google Play / App Store links (every order goes through the app) all live in `src/data/makhanani.ts`. Anything marked `TODO` there is a placeholder. The page title and social preview text are in `index.html`. Photos and logos are in `public/images/makhanani/`.
 
 ## Deploy
 

@@ -1,8 +1,8 @@
 // Everything the site says about Makhanani lives here, so a price, a phone
 // number or the business name only ever needs changing in one place.
 //
-// TODO (owner): the phone/WhatsApp number, area, email, opening hours and
-// prices below are placeholders. Replace them with the real ones.
+// TODO (owner): the phone number, app store links, area, email, opening
+// hours and prices below are placeholders. Replace them with the real ones.
 
 const IMG = "/images/makhanani";
 
@@ -14,17 +14,20 @@ export const BRAND = {
   promise: "Cooked to perfection.",
   area: "Gauteng", // TODO: add the street / township
   email: "orders@makhanani.co.za", // TODO: real email
-  /** International format, no +. Used for every order and enquiry. */
-  whatsapp: "27000000000", // TODO: real WhatsApp number
+  /** International format, used for tel: links. */
+  phone: "+27000000000", // TODO: real phone number
   phoneDisplay: "+27 00 000 0000", // TODO: real phone number
   logo: `${IMG}/wordmark.png`,
   emblem: `${IMG}/emblem.jpg`,
   heroImage: `${IMG}/full_plate.jpg`,
 } as const;
 
-/** A WhatsApp link that opens a chat with the message already typed. */
-export const whatsappLink = (message: string) =>
-  `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(message)}`;
+/** All ordering happens in the Makhanani app. */
+export const APP_LINKS = {
+  // TODO (owner): replace these store searches with the app's direct store links.
+  playStore: "https://play.google.com/store/search?q=Makhanani&c=apps",
+  appStore: "https://apps.apple.com/za/search?term=Makhanani",
+};
 
 export const PHOTOS = {
   fullPlate: `${IMG}/full_plate.jpg`,
@@ -233,11 +236,11 @@ export const FAQS = [
   },
   {
     q: "How do I order?",
-    a: "Send us a WhatsApp with what you'd like and when you'll collect. You can use the Order button on our menu page, and it types the message for you.",
+    a: "Download the Makhanani app from the Google Play Store or the Apple App Store, pick your plate, and place your order right there.",
   },
   {
     q: "Can I order for a big group or event?",
-    a: "Yes. For funerals, family gatherings, stokvels and parties, WhatsApp us at least a day ahead with how many people you're feeding.",
+    a: "Yes. For funerals, family gatherings, stokvels and parties, order in the app or give us a call at least a day ahead with how many people you're feeding.",
   },
   {
     q: "Can I eat in?",

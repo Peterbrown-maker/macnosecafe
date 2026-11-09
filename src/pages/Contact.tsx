@@ -5,13 +5,13 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionPill } from "@/components/SectionPill";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, MapPin, ChevronDown, Clock } from "lucide-react";
-import { BRAND, FAQS, OPENING_HOURS, PHOTOS, whatsappLink } from "@/data/makhanani";
+import { Mail, MapPin, ChevronDown, Clock, Phone, Send } from "lucide-react";
+import { BRAND, FAQS, OPENING_HOURS, PHOTOS } from "@/data/makhanani";
 
 const SUBJECTS: Record<string, string> = {
   general: "General enquiry",
-  order: "Takeaway order",
   bulk: "Big order / event",
+  app: "Help with the app",
   feedback: "Feedback",
 };
 
@@ -26,12 +26,9 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = [
-      `Hi ${BRAND.name}! (${SUBJECTS[formState.subject]})`,
-      formState.message,
-      `From: ${formState.name} (${formState.email})`,
-    ].join("\n\n");
-    window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
+    const subject = `${SUBJECTS[formState.subject]} from ${formState.name}`;
+    const body = `${formState.message}\n\nFrom: ${formState.name} (${formState.email})`;
+    window.location.href = `mailto:${BRAND.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setFormState({ name: "", email: "", subject: "general", message: "" });
   };
 
@@ -53,7 +50,7 @@ const Contact = () => {
                 Contact Us
               </h1>
               <p className="text-lg text-secondary-foreground/80 max-w-2xl mx-auto">
-                Ordering for a gathering, asking about prices, or just hungry? We're one WhatsApp away.
+                To order, use the Makhanani app. For anything else, like big orders for a gathering, we're a call or an email away.
               </p>
             </motion.div>
           </div>
@@ -117,8 +114,8 @@ const Contact = () => {
                   </div>
 
                   <Button type="submit" size="lg">
-                    <MessageCircle size={18} />
-                    Send via WhatsApp
+                    <Send size={18} />
+                    Send Email
                   </Button>
                 </form>
               </ScrollReveal>
@@ -152,11 +149,11 @@ const Contact = () => {
 
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                        <MessageCircle size={18} />
+                        <Phone size={18} />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-foreground">WhatsApp & Calls</p>
-                        <a href={whatsappLink(`Hi ${BRAND.name}!`)} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                        <p className="text-sm font-medium text-foreground">Calls</p>
+                        <a href={`tel:${BRAND.phone}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                           {BRAND.phoneDisplay}
                         </a>
                       </div>

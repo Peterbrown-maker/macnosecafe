@@ -66,7 +66,7 @@ export function Navbar() {
               );
             })}
             <Button size="sm" asChild>
-              <Link to="/menu#order">Order Now</Link>
+              <Link to="/#app">Get the App</Link>
             </Button>
           </div>
 
@@ -131,7 +131,7 @@ export function Navbar() {
 
               <div className="mt-auto">
                 <Button variant="hero" size="lg" className="w-full" asChild>
-                  <Link to="/menu#order" onClick={() => setMobileOpen(false)}>Order Now</Link>
+                  <Link to="/#app" onClick={() => setMobileOpen(false)}>Get the App</Link>
                 </Button>
               </div>
             </motion.div>

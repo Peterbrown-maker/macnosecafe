@@ -10,12 +10,12 @@ const services = [
   {
     icon: ShoppingBag,
     title: "Takeaway",
-    description: "WhatsApp your order ahead and collect it on your way home",
+    description: "Order ahead in the app and collect it on your way home",
   },
   {
     icon: CalendarDays,
     title: "Big Orders",
-    description: "Funerals, family gatherings, stokvels and parties. Order a day ahead and we'll feed everyone",
+    description: "Funerals, family gatherings, stokvels and parties. Order a day ahead in the app and we'll feed everyone",
   },
 ];
 

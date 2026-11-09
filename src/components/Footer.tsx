@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Clock, Mail, MapPin, MessageCircle } from "lucide-react";
-import { BRAND, OPENING_HOURS, whatsappLink } from "@/data/makhanani";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { BRAND, OPENING_HOURS } from "@/data/makhanani";
+import { StoreButtons } from "@/components/StoreButtons";
 
 const exploreLinks = [
   { name: "Home", path: "/" },
@@ -19,8 +20,9 @@ export function Footer() {
           <div className="space-y-4">
             <img src={BRAND.logo} alt={BRAND.fullName} className="h-16 w-auto rounded" />
             <p className="text-sm text-white/70 leading-relaxed">
-              Half skops, cow heads, pig heads, cow heels and fresh pap, slow-cooked and {BRAND.promise.toLowerCase()} Eat in, take away, or order for the whole family.
+              Half skops, cow heads, pig heads, cow heels and fresh pap, slow-cooked and {BRAND.promise.toLowerCase()} Order in the Makhanani app.
             </p>
+            <StoreButtons />
           </div>
 
           {/* Explore */}
@@ -57,13 +59,8 @@ export function Footer() {
             <h4 className="font-heading font-semibold text-sm mb-4">Find Us</h4>
             <ul className="space-y-3 text-sm text-white/70">
               <li className="flex items-center gap-2">
-                <MessageCircle size={16} className="flex-shrink-0" />
-                <a
-                  href={whatsappLink(`Hi ${BRAND.name}!`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
+                <Phone size={16} className="flex-shrink-0" />
+                <a href={`tel:${BRAND.phone}`} className="hover:text-white transition-colors">
                   {BRAND.phoneDisplay}
                 </a>
               </li>

@@ -3,12 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BRAND } from "@/data/brianos";
+import { BRAND } from "@/data/makhanani";
 
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
-  { name: "What's On", path: "/services" },
+  { name: "How to Order", path: "/services" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
 ];
@@ -18,8 +18,6 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
-  // Every page but Home opens on a dark photo, so the bar starts out light-on-dark.
-  const onDarkHero = !scrolled && location.pathname !== "/";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -38,30 +36,24 @@ export function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "glass-navbar shadow-card" : "bg-transparent"
+          scrolled ? "glass-navbar-dark shadow-card" : "bg-transparent"
         }`}
       >
         <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4 lg:px-8">
           {/* Logo */}
           <Link to="/" className="flex items-center" aria-label={`${BRAND.name} home`}>
-            <img
-              src={onDarkHero ? BRAND.logoWhite : BRAND.logoBlack}
-              alt={BRAND.name}
-              className="h-10 md:h-12 w-auto"
-            />
+            <img src={BRAND.logo} alt={BRAND.fullName} className="h-10 md:h-14 w-auto rounded" />
           </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               const active = location.pathname === link.path;
-              const idle = onDarkHero ? "text-white/75 hover:text-white" : "text-muted-foreground hover:text-primary";
-              const current = onDarkHero ? "text-white" : "text-primary";
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative text-sm font-medium transition-colors duration-200 ${active ? current : idle}`}
+                  className={`relative text-sm font-medium transition-colors duration-200 ${active ? "text-white" : "text-white/70 hover:text-white"}`}
                 >
                   {link.name}
                   {active && (
@@ -74,13 +66,13 @@ export function Navbar() {
               );
             })}
             <Button size="sm" asChild>
-              <Link to="/menu#book">Book a Table</Link>
+              <Link to="/menu#order">Order Now</Link>
             </Button>
           </div>
 
           {/* Mobile Hamburger */}
           <button
-            className={`md:hidden p-2 ${onDarkHero ? "text-white" : "text-foreground"}`}
+            className={`md:hidden p-2 text-white`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -139,7 +131,7 @@ export function Navbar() {
 
               <div className="mt-auto">
                 <Button variant="hero" size="lg" className="w-full" asChild>
-                  <Link to="/menu#book" onClick={() => setMobileOpen(false)}>Book a Table</Link>
+                  <Link to="/menu#order" onClick={() => setMobileOpen(false)}>Order Now</Link>
                 </Button>
               </div>
             </motion.div>

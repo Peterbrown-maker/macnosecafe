@@ -4,28 +4,28 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/Scroll
 import { SectionPill } from "@/components/SectionPill";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Beef, BookOpen, Calendar, Drumstick, Fish, Martini, MessageCircle, Smartphone, Utensils, X } from "lucide-react";
+import { Beef, BookOpen, Calendar, CookingPot, Footprints, MessageCircle, ShoppingBag, UsersRound, UtensilsCrossed, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { BRAND, MENU, whatsappLink } from "@/data/brianos";
+import { BRAND, MENU, PHOTOS, whatsappLink } from "@/data/makhanani";
 
-const GROUP_ICONS = { braai: Beef, "wings-burgers": Drumstick, platters: Fish, bar: Martini } as Record<string, typeof Beef>;
+const GROUP_ICONS = { heads: Beef, feet: Footprints, plates: UtensilsCrossed, sides: CookingPot } as Record<string, typeof Beef>;
 
-type BookingType = "table" | "meal";
+type BookingType = "order" | "bulk";
 
-const BOOKING_LABEL: Record<BookingType, string> = { table: "Book a Table", meal: "Pre-order a Meal" };
+const BOOKING_LABEL: Record<BookingType, string> = { order: "Order for Collection", bulk: "Big Order / Event" };
 
 const Menu = () => {
   const location = useLocation();
   const [modalOpen, setModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [bookingType, setBookingType] = useState<BookingType>("table");
+  const [bookingType, setBookingType] = useState<BookingType>("order");
   const [bookingLink, setBookingLink] = useState<string | null>(null);
   const [bookingDetails, setBookingDetails] = useState("");
   const [bookingForm, setBookingForm] = useState({
     date: "",
     time: "",
-    guests: "2",
+    guests: "10",
     name: "",
     phone: "",
     email: "",
@@ -38,9 +38,9 @@ const Menu = () => {
     setBookingModalOpen(true);
   };
 
-  // "Book a Table" buttons elsewhere on the site link to /menu#book.
+  // "Order Now" buttons elsewhere on the site link to /menu#order.
   useEffect(() => {
-    if (location.hash === "#book") openBooking("table");
+    if (location.hash === "#order") openBooking("order");
   }, [location.key, location.hash]);
 
   const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -53,14 +53,16 @@ const Menu = () => {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const summary = `${bookingForm.date} at ${bookingForm.time} for ${bookingForm.guests} ${bookingForm.guests === "1" ? "guest" : "guests"}`;
+    const summary = bookingType === "bulk"
+        ? `${bookingForm.date} at ${bookingForm.time}, feeding about ${bookingForm.guests} people`
+        : `Collect ${bookingForm.date} at ${bookingForm.time}`;
     const message = [
-      `Hi ${BRAND.name}! I'd like to ${bookingType === "table" ? "book a table" : "pre-order a meal"}.`,
+      `Hi ${BRAND.name}! I'd like to ${bookingType === "bulk" ? "place a big order for an event" : "place an order for collection"}.`,
       `When: ${summary}`,
       `Name: ${bookingForm.name}`,
       `Phone: ${bookingForm.phone}`,
       bookingForm.email && `Email: ${bookingForm.email}`,
-      bookingForm.specialRequests && `Requests: ${bookingForm.specialRequests}`,
+      bookingForm.specialRequests && `Order: ${bookingForm.specialRequests}`,
     ]
       .filter(Boolean)
       .join("\n");
@@ -73,27 +75,27 @@ const Menu = () => {
 
   const orderOptions = [
     {
-      id: "order-now",
-      name: "Order in the App",
-      description: "Delivery or collect, right from your phone",
-      icon: Smartphone,
-      action: null,
-      badge: "Coming Soon",
-    },
-    {
-      id: "book-meal",
-      name: BOOKING_LABEL.meal,
-      description: "Tell us what you'd like via WhatsApp",
+      id: "order-whatsapp",
+      name: "Order on WhatsApp",
+      description: "Just message us what you want",
       icon: MessageCircle,
-      action: () => openBooking("meal"),
+      action: () => window.open(whatsappLink(`Hi ${BRAND.name}! I'd like to place an order.`), "_blank", "noopener,noreferrer"),
       badge: null,
     },
     {
-      id: "book-table",
-      name: BOOKING_LABEL.table,
-      description: "Eat in with the squad and stay for the vibes",
-      icon: Utensils,
-      action: () => openBooking("table"),
+      id: "order-collect",
+      name: BOOKING_LABEL.order,
+      description: "Pick a time, tell us your order, collect it hot",
+      icon: ShoppingBag,
+      action: () => openBooking("order"),
+      badge: null,
+    },
+    {
+      id: "order-bulk",
+      name: BOOKING_LABEL.bulk,
+      description: "Funerals, gatherings, stokvels and parties",
+      icon: UsersRound,
+      action: () => openBooking("bulk"),
       badge: null,
     },
   ];
@@ -104,19 +106,19 @@ const Menu = () => {
       <main>
         {/* Hero */}
         <section className="gradient-hero relative overflow-hidden pt-32 pb-24">
-          <img src="/images/brianos/mixed_grill_platter.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+          <img src={PHOTOS.fullPlate} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <SectionPill variant="dark">Straight Off the Braai</SectionPill>
+              <SectionPill variant="dark">Straight Out the Pot</SectionPill>
               <h1 className="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl text-primary-foreground mt-6 mb-6">
                 Our Menu
               </h1>
               <p className="text-lg text-secondary-foreground/80 max-w-2xl mx-auto">
-                Flame-grilled meat, sharing platters, seafood, burgers and cocktails, all made with love and served with joy.
+                Half skops, full skops, cow heads, pig heads and cow heels, with fresh pap and gravy. Cooked to perfection.
               </p>
             </motion.div>
           </div>
@@ -206,8 +208,8 @@ const Menu = () => {
                           <Button variant="hero" size="lg" onClick={() => setModalOpen(true)} className="w-full">
                             Order Now
                           </Button>
-                          <Button variant="heroOutline" size="lg" onClick={() => openBooking("table")} className="w-full">
-                            Book a Table
+                          <Button variant="heroOutline" size="lg" onClick={() => openBooking("bulk")} className="w-full">
+                            Big Order / Event
                           </Button>
                         </div>
                       </motion.div>
@@ -227,7 +229,7 @@ const Menu = () => {
                 Ready to Eat?
               </h2>
               <p className="text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-                Send us a WhatsApp to order or book, and we'll get the fire going.
+                Send us a WhatsApp with your order and we'll have it ready for you.
               </p>
               <Button
                 variant="heroOutline"
@@ -240,7 +242,7 @@ const Menu = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Order via WhatsApp
+                  Order on WhatsApp
                 </a>
               </Button>
             </ScrollReveal>
@@ -335,7 +337,7 @@ const Menu = () => {
                 {/* Footer */}
                 <div className="px-6 py-4 border-t border-border bg-muted">
                   <p className="text-xs text-muted-foreground text-center">
-                    Pay by card or cash. Alcohol is for customers 18+ only.
+                    Pay by cash or card when you collect.
                   </p>
                 </div>
               </div>
@@ -414,10 +416,11 @@ const Menu = () => {
                     />
                   </div>
 
-                  {/* Number of Guests */}
+                  {/* Number of people (big orders only) */}
+                  {bookingType === "bulk" && (
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      👥 Number of Guests *
+                      👥 How Many People? *
                     </label>
                     <select
                       name="guests"
@@ -426,16 +429,17 @@ const Menu = () => {
                       required
                       className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                     >
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                      {[10, 20, 30, 40, 50].map((num) => (
                         <option key={num} value={num}>
-                          {num} {num === 1 ? "Guest" : "Guests"}
+                          About {num} people
                         </option>
                       ))}
                     </select>
                     <p className="text-xs text-muted-foreground mt-1">
-                      10 or more? Call us on {BRAND.phoneDisplay}.
+                      More than 50? Call us on {BRAND.phoneDisplay}.
                     </p>
                   </div>
+                  )}
 
                   {/* Name */}
                   <div>
@@ -487,17 +491,17 @@ const Menu = () => {
                   {/* Special Requests */}
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      📝 {bookingType === "meal" ? "What Would You Like? *" : "Special Requests (Optional)"}
+                      📝 What Would You Like? *
                     </label>
                     <textarea
                       name="specialRequests"
                       value={bookingForm.specialRequests}
                       onChange={handleBookingChange}
-                      required={bookingType === "meal"}
+                      required
                       placeholder={
-                        bookingType === "meal"
-                          ? "e.g. 1 Mixed Grill Platter, 2 Tropical Cocktails"
-                          : "Birthdays, allergies, where you'd like to sit..."
+                        bookingType === "bulk"
+                          ? "e.g. 10 Half Skop & Pap, 5 Feet & Pap, extra gravy"
+                          : "e.g. 2 Half Skop & Pap, 1 extra gravy"
                       }
                       rows={3}
                       className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-none"

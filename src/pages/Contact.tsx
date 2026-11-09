@@ -6,14 +6,13 @@ import { SectionPill } from "@/components/SectionPill";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Mail, MessageCircle, MapPin, ChevronDown, Clock } from "lucide-react";
-import { BRAND, FAQS, OPENING_HOURS, whatsappLink } from "@/data/brianos";
+import { BRAND, FAQS, OPENING_HOURS, PHOTOS, whatsappLink } from "@/data/makhanani";
 
 const SUBJECTS: Record<string, string> = {
   general: "General enquiry",
-  booking: "Table booking",
-  group: "Group booking (10+)",
-  order: "Help with an order",
-  events: "Events & line-up",
+  order: "Takeaway order",
+  bulk: "Big order / event",
+  feedback: "Feedback",
 };
 
 const Contact = () => {
@@ -42,7 +41,7 @@ const Contact = () => {
       <main>
         {/* Hero */}
         <section className="gradient-hero relative overflow-hidden pt-32 pb-24">
-          <img src={BRAND.heroImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+          <img src={PHOTOS.headPlate} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -54,7 +53,7 @@ const Contact = () => {
                 Contact Us
               </h1>
               <p className="text-lg text-secondary-foreground/80 max-w-2xl mx-auto">
-                Booking for a birthday, asking about the line-up, or just hungry? We're one WhatsApp away.
+                Ordering for a gathering, asking about prices, or just hungry? We're one WhatsApp away.
               </p>
             </motion.div>
           </div>
@@ -129,7 +128,7 @@ const Contact = () => {
                 <div className="space-y-8">
                   {/* Location */}
                   <div className="w-full aspect-[4/3] rounded-lg gradient-hero relative overflow-hidden">
-                    <img src="/images/brianos/mixed_grill_platter.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                    <img src={PHOTOS.fullPlate} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
                         <MapPin className="text-white mx-auto mb-2" size={32} />

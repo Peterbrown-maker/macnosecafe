@@ -1,6 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { BRAND } from "@/data/brianos";
+import { BRAND } from "@/data/makhanani";
 
 const NotFound = () => {
   const location = useLocation();
@@ -10,11 +10,11 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted px-4">
+    <div className="flex min-h-screen items-center justify-center bg-neutral-950 text-white px-4">
       <div className="text-center">
-        <img src={BRAND.logoBlack} alt={BRAND.name} className="h-14 w-auto mx-auto mb-8" />
+        <img src={BRAND.logo} alt={BRAND.fullName} className="h-20 w-auto mx-auto mb-8 rounded" />
         <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Nothing on the fire here.</p>
+        <p className="mb-4 text-xl text-white/70">Nothing in the pot here.</p>
         <Link to="/" className="text-primary underline hover:text-primary/90">
           Back to {BRAND.name}
         </Link>

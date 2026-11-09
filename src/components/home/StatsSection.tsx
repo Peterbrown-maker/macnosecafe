@@ -1,11 +1,11 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { MENU_CATEGORIES } from "@/data/brianos";
+import { MENU_CATEGORIES } from "@/data/makhanani";
 
 const stats = [
-  { target: MENU_CATEGORIES.length, label: "Menu Categories" },
-  { target: 3, label: "Ways to Eat" },
-  { target: 4, label: "Nights on the Line-up" },
-  { target: 7, label: "Days a Week" },
+  { target: "3", label: "Kinds of Heads" },
+  { target: "Half", label: "Or Full Skop" },
+  { target: "Fresh", label: "Pap All Day" },
+  { target: "7", label: "Days a Week" },
 ];
 
 export function StatsSection() {

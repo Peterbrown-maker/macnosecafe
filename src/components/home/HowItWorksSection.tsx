@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { ClipboardList, Flame, MapPin, UtensilsCrossed } from "lucide-react";
+import { ClipboardList, CookingPot, MessageCircle, UtensilsCrossed } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 const steps = [
   {
-    icon: MapPin,
-    title: "Choose How You Eat",
-    description: "Delivery to where you are, collect from us, or sit in with the squad",
-  },
-  {
     icon: ClipboardList,
-    title: "Pick Off the Menu",
-    description: "Grills, wings, ribs, platters, seafood, burgers and cocktails",
+    title: "Pick Your Plate",
+    description: "Half skop, full skop, cow head, pig head, cow heels, with pap and gravy",
   },
   {
-    icon: Flame,
-    title: "We Fire It Up",
-    description: "Your order goes on the braai and gets grilled to order",
+    icon: MessageCircle,
+    title: "Send a WhatsApp",
+    description: "Tell us what you want and when you're coming. We'll confirm in the chat",
+  },
+  {
+    icon: CookingPot,
+    title: "We Dish Up",
+    description: "Straight out of the pot, spiced and plated hot with fresh pap",
   },
   {
     icon: UtensilsCrossed,
     title: "Eat & Enjoy",
-    description: "Track your driver to your door, or come through for the vibes",
+    description: "Sit down and eat with us, or collect and take it home",
   },
 ];
 
@@ -31,7 +31,7 @@ export function HowItWorksSection() {
       <div className="container mx-auto px-4 lg:px-8">
         <ScrollReveal>
           <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-foreground text-center mb-16">
-            From the Fire to Your Plate
+            From the Pot to Your Plate
           </h2>
         </ScrollReveal>
 

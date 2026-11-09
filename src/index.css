@@ -48,7 +48,7 @@
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #0a0a0a 100%);
-    --gradient-primary: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    --gradient-primary: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
     --gradient-accent: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
 
     /* Shadows */
@@ -103,7 +103,7 @@
   }
 
   .glass-navbar-dark {
-    background: rgba(26, 26, 46, 0.85);
+    background: rgba(10, 10, 10, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);

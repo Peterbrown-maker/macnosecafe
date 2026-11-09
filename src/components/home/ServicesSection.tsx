@@ -1,36 +1,21 @@
-import { Bike, CalendarDays, Martini, Music2, ShoppingBag, UsersRound } from "lucide-react";
+import { CalendarDays, ShoppingBag, UsersRound } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 
 const services = [
   {
-    icon: Bike,
-    title: "Delivery",
-    description: "Hot off the fire and on its way to your live location, usually in 25–40 minutes",
+    icon: UsersRound,
+    title: "Eat In",
+    description: "Pull up a chair and eat it hot, straight out of the pot, with good company",
   },
   {
     icon: ShoppingBag,
-    title: "Collect",
-    description: "Order ahead and skip the wait. Ready in about 20 minutes",
+    title: "Takeaway",
+    description: "WhatsApp your order ahead and collect it on your way home",
   },
   {
     icon: CalendarDays,
-    title: "Sit-in",
-    description: "Book a table, pick your time and party size, and eat in with the squad",
-  },
-  {
-    icon: Martini,
-    title: "Bar & Cocktails",
-    description: "Tropical cocktails shaken to order, with weekday happy hour from 17:00",
-  },
-  {
-    icon: Music2,
-    title: "Club Nights",
-    description: "Resident DJs and live bands every week, from Amapiano to jazz",
-  },
-  {
-    icon: UsersRound,
-    title: "Group Bookings",
-    description: "Coming through with 10 or more? Give us a call and we'll sort you out",
+    title: "Big Orders",
+    description: "Funerals, family gatherings, stokvels and parties. Order a day ahead and we'll feed everyone",
   },
 ];
 
@@ -41,13 +26,11 @@ export function ServicesSection() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <ScrollReveal>
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
-              More Than a Plate of Meat
+              However You Want It
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="text-lg text-muted-foreground">
-              However you want it, we've got you covered
-            </p>
+            <p className="text-lg text-muted-foreground">Eat with us, take it home, or let us cater for the whole family</p>
           </ScrollReveal>
         </div>
 
@@ -58,9 +41,7 @@ export function ServicesSection() {
                 <div className="w-14 h-14 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <service.icon size={28} />
                 </div>
-                <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
-                  {service.title}
-                </h3>
+                <h3 className="font-heading font-semibold text-lg text-foreground mb-2">{service.title}</h3>
                 <p className="text-sm text-muted-foreground">{service.description}</p>
               </div>
             </StaggerItem>

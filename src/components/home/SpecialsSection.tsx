@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarDays, ChevronLeft, ChevronRight, Tag } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { SPECIALS } from "@/data/brianos";
+import { SPECIALS } from "@/data/makhanani";
 
 export function SpecialsSection() {
   const [current, setCurrent] = useState(0);

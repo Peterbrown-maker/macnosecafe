@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Clock, Mail, MapPin, MessageCircle } from "lucide-react";
-import { BRAND, OPENING_HOURS, whatsappLink } from "@/data/brianos";
+import { BRAND, OPENING_HOURS, whatsappLink } from "@/data/makhanani";
 
 const exploreLinks = [
   { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
-  { name: "What's On", path: "/services" },
+  { name: "How to Order", path: "/services" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
 ];
@@ -17,9 +17,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <img src={BRAND.logoWhite} alt={BRAND.name} className="h-12 w-auto" />
+            <img src={BRAND.logo} alt={BRAND.fullName} className="h-16 w-auto rounded" />
             <p className="text-sm text-white/70 leading-relaxed">
-              {BRAND.descriptor}. {BRAND.promise} Order the meat, or come through.
+              Half skops, cow heads, pig heads, cow heels and fresh pap, slow-cooked and {BRAND.promise.toLowerCase()} Eat in, take away, or order for the whole family.
             </p>
           </div>
 
@@ -83,8 +83,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60 text-center md:text-left">
-          <p>© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
-          <p>Not for sale to persons under the age of 18. Please drink responsibly.</p>
+          <p>© {new Date().getFullYear()} {BRAND.fullName}. All rights reserved.</p>
           <p>{BRAND.tagline}</p>
         </div>
       </div>

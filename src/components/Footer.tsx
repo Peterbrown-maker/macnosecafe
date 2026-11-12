@@ -1,33 +1,34 @@
 import { Link } from "react-router-dom";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import { BRAND, OPENING_HOURS } from "@/data/makhanani";
-import { StoreButtons } from "@/components/StoreButtons";
+import { Clock, MapPin, Navigation } from "lucide-react";
+import { BRAND, DIRECTIONS_URL, OPENING_HOURS } from "@/data/macnose";
+import { SocialIcons } from "@/components/VisitButtons";
 
 const exploreLinks = [
   { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
-  { name: "How to Order", path: "/services" },
+  { name: "Specials", path: "/specials" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-neutral-950 text-white">
+    <footer className="bg-black text-white">
       <div className="container mx-auto px-4 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <img src={BRAND.logo} alt={BRAND.fullName} className="h-16 w-auto rounded" />
+            <img src={BRAND.logo} alt={BRAND.fullName} className="h-20 w-20 rounded-full" />
             <p className="text-sm text-white/70 leading-relaxed">
-              Half skops, cow heads, pig heads, cow heels and fresh pap, slow-cooked and {BRAND.promise.toLowerCase()} Order in the Makhanani app.
+              Pub &amp; restaurant in Short Left, Soshanguve since {BRAND.established}. South African cuisine, quality
+              grills, seafood, premium bottles and feel-good music.
             </p>
-            <StoreButtons />
+            <SocialIcons onDark />
           </div>
 
           {/* Explore */}
           <div>
-            <h4 className="font-heading font-semibold text-sm mb-4">Explore</h4>
+            <h4 className="font-heading font-semibold text-sm mb-4 text-white">Explore</h4>
             <ul className="space-y-3">
               {exploreLinks.map((link) => (
                 <li key={link.path}>
@@ -41,7 +42,7 @@ export function Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="font-heading font-semibold text-sm mb-4 flex items-center gap-2">
+            <h4 className="font-heading font-semibold text-sm mb-4 flex items-center gap-2 text-white">
               <Clock size={16} /> Opening Hours
             </h4>
             <ul className="space-y-3 text-sm text-white/70">
@@ -54,25 +55,23 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Find us */}
           <div>
-            <h4 className="font-heading font-semibold text-sm mb-4">Find Us</h4>
+            <h4 className="font-heading font-semibold text-sm mb-4 text-white">Find Us</h4>
             <ul className="space-y-3 text-sm text-white/70">
-              <li className="flex items-center gap-2">
-                <Phone size={16} className="flex-shrink-0" />
-                <a href={`tel:${BRAND.phone}`} className="hover:text-white transition-colors">
-                  {BRAND.phoneDisplay}
-                </a>
+              <li className="flex items-start gap-2">
+                <MapPin size={16} className="flex-shrink-0 mt-0.5" />
+                <span>
+                  {BRAND.address.street}
+                  <br />
+                  {BRAND.address.city}
+                </span>
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={16} className="flex-shrink-0" />
-                <a href={`mailto:${BRAND.email}`} className="hover:text-white transition-colors">
-                  {BRAND.email}
+                <Navigation size={16} className="flex-shrink-0" />
+                <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  Get directions
                 </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={16} className="flex-shrink-0" />
-                {BRAND.area}
               </li>
             </ul>
           </div>
@@ -80,8 +79,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60 text-center md:text-left">
-          <p>© {new Date().getFullYear()} {BRAND.fullName}. All rights reserved.</p>
-          <p>{BRAND.tagline}</p>
+          <p>
+            © {new Date().getFullYear()} {BRAND.fullName}, Short Left. All rights reserved.
+          </p>
+          <p className="font-script text-xl text-primary">{BRAND.slogan}</p>
         </div>
       </div>
     </footer>

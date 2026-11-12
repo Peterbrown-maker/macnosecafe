@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { MENU_CATEGORIES } from "@/data/makhanani";
+import { BRAND, MENU, MENU_ITEM_COUNT } from "@/data/macnose";
 
 const stats = [
-  { target: "3", label: "Kinds of Heads" },
-  { target: "Half", label: "Or Full Skop" },
-  { target: "Fresh", label: "Pap All Day" },
+  { target: String(BRAND.established), label: "Serving Short Left Since" },
+  { target: `${Math.floor(MENU_ITEM_COUNT / 10) * 10}+`, label: "Dishes & Drinks" },
+  { target: "02:00", label: "Late on Fridays & Saturdays" },
   { target: "7", label: "Days a Week" },
 ];
 
@@ -20,25 +21,24 @@ export function StatsSection() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="font-heading font-bold text-4xl md:text-5xl text-primary-foreground mb-2">
-                  {stat.target}
-                </div>
+                <div className="font-heading font-bold text-4xl md:text-5xl text-primary-foreground mb-2">{stat.target}</div>
                 <div className="text-sm text-primary-foreground/80">{stat.label}</div>
               </div>
             ))}
           </div>
         </ScrollReveal>
 
-        {/* What's on the menu */}
+        {/* Every section of the menu, as quick links */}
         <ScrollReveal delay={0.2}>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {MENU_CATEGORIES.map((category) => (
-              <div
-                key={category}
-                className="px-4 py-2 rounded-pill bg-primary-foreground/15 text-sm text-primary-foreground font-medium"
+            {MENU.map((section) => (
+              <Link
+                key={section.id}
+                to={`/menu#${section.id}`}
+                className="px-4 py-2 rounded-pill bg-primary-foreground/15 text-sm text-primary-foreground font-medium hover:bg-primary-foreground/25 transition-colors"
               >
-                {category}
-              </div>
+                {section.name}
+              </Link>
             ))}
           </div>
         </ScrollReveal>

@@ -2,12 +2,10 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
 import { AboutSection } from "@/components/home/AboutSection";
-import { HeadsSection } from "@/components/home/HeadsSection";
-import { HowItWorksSection } from "@/components/home/HowItWorksSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
+import { HighlightsSection } from "@/components/home/HighlightsSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { SpecialsSection } from "@/components/home/SpecialsSection";
-import { OrderSection } from "@/components/home/OrderSection";
+import { VisitSection } from "@/components/home/VisitSection";
 
 const Index = () => {
   return (
@@ -16,12 +14,10 @@ const Index = () => {
       <main>
         <HeroSection />
         <AboutSection />
-        <HeadsSection />
-        <HowItWorksSection />
-        <ServicesSection />
-        <StatsSection />
+        <HighlightsSection />
         <SpecialsSection />
-        <OrderSection />
+        <StatsSection />
+        <VisitSection />
       </main>
       <Footer />
     </div>

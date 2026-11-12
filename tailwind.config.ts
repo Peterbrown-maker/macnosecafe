@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Poppins", "sans-serif"],
+        heading: ["Playfair Display", "serif"],
+        script: ["Great Vibes", "cursive"],
         body: ["Inter", "sans-serif"],
       },
       colors: {

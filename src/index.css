@@ -5,24 +5,24 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 4%;
+    --foreground: 0 0% 7%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 4%;
+    --card-foreground: 0 0% 7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 4%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 17 88% 40%;
+    --primary: 350 85% 42%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 4%;
+    --secondary: 0 0% 7%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 36%;
 
-    --accent: 17 88% 40%;
+    --accent: 350 85% 42%;
     --accent-foreground: 0 0% 100%;
 
     --success: 142 71% 45%;
@@ -36,35 +36,35 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 96%;
-    --ring: 17 88% 40%;
+    --ring: 350 85% 42%;
 
     --radius: 0.75rem;
 
-    /* Brand tokens: white canvas, near-black type, one ember accent for the fire */
-    --primary-hover: 17 88% 33%;
-    --primary-light: 24 100% 96%;
-    --secondary-light: 0 0% 15%;
+    /* Brand tokens: white canvas, black type, MacNose red. Matches the logo. */
+    --primary-hover: 350 85% 34%;
+    --primary-light: 0 0% 100%;
+    --secondary-light: 0 0% 14%;
     --text-on-dark: 0 0% 96%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #0a0a0a 100%);
-    --gradient-primary: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
-    --gradient-accent: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+    --gradient-primary: linear-gradient(135deg, #d61a35 0%, #9a0a20 100%);
+    --gradient-accent: linear-gradient(135deg, #d61a35 0%, #9a0a20 100%);
 
     /* Shadows */
-    --shadow-card: 0 4px 12px rgba(10, 10, 10, 0.08);
-    --shadow-card-hover: 0 20px 40px rgba(10, 10, 10, 0.16);
-    --shadow-button: 0 4px 14px rgba(194, 65, 12, 0.3);
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.14);
+    --shadow-button: 0 4px 14px rgba(200, 16, 46, 0.3);
 
     /* Sidebar defaults */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 20%;
-    --sidebar-primary: 17 88% 40%;
+    --sidebar-primary: 350 85% 42%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 24 100% 96%;
-    --sidebar-accent-foreground: 17 88% 40%;
+    --sidebar-accent: 350 80% 97%;
+    --sidebar-accent-foreground: 350 85% 42%;
     --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 17 88% 40%;
+    --sidebar-ring: 350 85% 42%;
   }
 }
 
@@ -83,7 +83,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Playfair Display', serif;
   }
 }
 
@@ -96,14 +96,14 @@
   }
 
   .glass-navbar {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .glass-navbar-dark {
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(10, 10, 10, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -160,14 +160,14 @@
   }
 
   .gradient-mesh::before {
-    background: hsl(21 100% 55%);
+    background: hsl(350 85% 45%);
     top: -200px;
     right: -100px;
     animation-delay: 0s;
   }
 
   .gradient-mesh::after {
-    background: hsl(36 100% 55%);
+    background: hsl(0 0% 10%);
     bottom: -200px;
     left: -100px;
     animation-delay: -10s;

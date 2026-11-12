@@ -1,43 +1,45 @@
-import { CookingPot, Flame, UsersRound } from "lucide-react";
+import { Music, UtensilsCrossed, Wine } from "lucide-react";
 import { SectionPill } from "@/components/SectionPill";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
-import { BRAND } from "@/data/makhanani";
+import { BRAND } from "@/data/macnose";
 
 const features = [
   {
-    icon: Flame,
-    title: "Head Meats",
-    description: "Sheep, cow and pig heads, cleaned, slow-cooked and spiced. Half skop is the one everyone asks for.",
+    icon: UtensilsCrossed,
+    title: "South African Cuisine",
+    description:
+      "A huge variety of South African dishes, from ox tripe and traditional Monday meals to seafood, oysters and quality steak.",
   },
   {
-    icon: CookingPot,
-    title: "Pap & Gravy",
-    description: "Soft, smooth pap made fresh through the day, with a rich gravy that's been on the pot since morning.",
+    icon: Wine,
+    title: "Wines, Bottles & Bubbles",
+    description: "Superior wines, premium whiskey, cognac and tequila, champagne on ice and cocktails from the bar.",
   },
   {
-    icon: UsersRound,
-    title: "Good Vibes",
-    description: "Pull up a chair and eat it hot with the people you came with, or take it home to the family.",
+    icon: Music,
+    title: "Feel-Good Music",
+    description: "Good food, good company and the right music. A dining experience you'll want to come back for.",
   },
 ];
 
 export function AboutSection() {
   return (
-    <section className="py-24 bg-white" id="about">
+    <section className="py-24 bg-background" id="about">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <ScrollReveal>
-            <SectionPill>About {BRAND.name}</SectionPill>
+            <SectionPill>Our Sanctuary · Since {BRAND.established}</SectionPill>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-foreground mt-4 mb-6">
-              Proper Kasi Food, Cooked Slow
+              "Take a Short Left"
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              {BRAND.fullName} is where you come for a real plate of skop and pap. No shortcuts: the heads cook low and
-              slow until the meat falls off the bone, the pap is fresh, and the gravy is thick. {BRAND.promise}
+              Our extensive menu offers a huge variety of South African dishes, specialising in African cuisine (like ox
+              tripe), seafood (like oysters) and quality meat (like steak). Superior wines, premium bottles, bubbles and
+              feel-good music make for a unique dining experience.
             </p>
           </ScrollReveal>
         </div>

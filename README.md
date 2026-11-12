@@ -1,6 +1,6 @@
-# Makhanani Shisanyama Website
+# MacNose Cafe Website
 
-The website for Makhanani Shisanyama: half skops, head meats (cow, pig and sheep), cow heels, pap and gravy. Built with Vite, React, TypeScript, Tailwind CSS and shadcn/ui.
+The website for MacNose Cafe, a pub & restaurant in Short Left, Soshanguve (est. 2007): traditional Monday meals, grills, oxtail, seafood platters, oysters and a full bar. Built with Vite, React, TypeScript, Tailwind CSS and shadcn/ui.
 
 ## Run it
 
@@ -11,8 +11,9 @@ npm run dev
 
 ## Update the content
 
-Prices, the menu, opening hours, specials, FAQs, the business name and contact details and the Google Play / App Store links (every order goes through the app) all live in `src/data/makhanani.ts`. Anything marked `TODO` there is a placeholder. The page title and social preview text are in `index.html`. Photos and logos are in `public/images/makhanani/`.
+The full food and drinks menu with prices, opening hours, address, social links, specials posters, gallery and FAQs all live in `src/data/macnose.ts`. The page title and social preview text are in `index.html`. Photos and the logo are in `public/images/macnose/`.
 
 ## Deploy
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md).
+"# macnosecafe" 
